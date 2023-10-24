@@ -111,13 +111,6 @@ async def process_numbers_answer(message: Message):
                 'Может, сыграем еще?'
             )
             print(users)
-        elif int(message.text) < users[message.from_user.id]['secret_number']:
-            users[message.from_user.id]['attempts'] -= 1
-            print({users[message.from_user.id]["secret_number"]})
-            await message.answer('мое число больше')
-        elif int(message.text) > users[message.from_user.id]['secret_number']:
-            users[message.from_user.id]['attempts'] -= 1
-            await message.answer('мое число меньше')
         elif users[message.from_user.id]['attempts'] == 0:
             users[message.from_user.id]['in_game'] = False
             users[message.from_user.id]['total_games'] += 1
@@ -127,6 +120,14 @@ async def process_numbers_answer(message: Message):
                 f'было {users[message.from_user.id]["secret_number"]}\n\nДавайте '
                 f'сыграем еще?'
             )
+            print(users)
+        elif int(message.text) < users[message.from_user.id]['secret_number']:
+            users[message.from_user.id]['attempts'] -= 1
+            print({users[message.from_user.id]["secret_number"]})
+            await message.answer('мое число больше')
+        elif int(message.text) > users[message.from_user.id]['secret_number']:
+            users[message.from_user.id]['attempts'] -= 1
+            await message.answer('мое число меньше')
         else:
             await message.answer('мы не играем, хотите сыграть?')
 
